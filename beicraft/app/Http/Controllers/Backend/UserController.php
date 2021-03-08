@@ -81,7 +81,7 @@ class UserController extends Controller
 
         $notification = array(
             'message' => 'User Deleted Successfully',
-            'alert-type' => 'success'
+            'alert-type' => 'info'
         );
 
         return Redirect()->route('user.view')->with($notification);

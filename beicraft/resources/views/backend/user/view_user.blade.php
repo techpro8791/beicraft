@@ -8,13 +8,13 @@
             <div class="content-header">
                 <div class="d-flex align-items-center">
                     <div class="mr-auto">
-                        <h3 class="page-title">Data Tables</h3>
+                        <h3 class="page-title">Manage Users</h3>
                         <div class="d-inline-block align-items-center">
                             <nav>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="mdi mdi-home-outline"></i></a></li>
-                                    <li class="breadcrumb-item" aria-current="page">Tables</li>
-                                    <li class="breadcrumb-item active" aria-current="page">Data Tables</li>
+                                    <li class="breadcrumb-item" aria-current="page">Manage Users</li>
+                                    <li class="breadcrumb-item active" aria-current="page">User List</li>
                                 </ol>
                             </nav>
                         </div>
@@ -54,8 +54,8 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>
-                                                        <a href="" class="btn btn-info">Edit</a>
-                                                        <a href="" class="btn btn-danger">Delete</a>
+                                                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-info">Edit</a>
+                                                        <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger" id="delete">Delete</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

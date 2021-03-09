@@ -8,13 +8,13 @@
             <div class="content-header">
                 <div class="d-flex align-items-center">
                     <div class="mr-auto">
-                        <h3 class="page-title">Fee Category</h3>
+                        <h3 class="page-title">Fee Amount</h3>
                         <div class="d-inline-block align-items-center">
                             <nav>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="mdi mdi-home-outline"></i></a></li>
                                     <li class="breadcrumb-item" aria-current="page">Manage Students</li>
-                                    <li class="breadcrumb-item active" aria-current="page">Student Fee Category List</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Student Fee Amount List</li>
                                 </ol>
                             </nav>
                         </div>
@@ -30,8 +30,8 @@
 
                         <div class="box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Student Fee Category List</h3>
-                                <a href="{{ route('fee.category.add') }}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add Fee Category</a>
+                                <h3 class="box-title">Student Fee Amount List</h3>
+                                <a href="{{ route('fee.amount.add') }}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add Fee Amount</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -40,18 +40,18 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">SN</th>
-                                                <th>Name</th>
+                                                <th>Fee Category</th>
                                                 <th width="20%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($all_data as $key => $category)
+                                            @foreach ($all_data as $key => $amount)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $category->name }}</td>
+                                                    <td>{{ $amount->name }}</td>
                                                     <td>
-                                                        <a href="{{ route('fee.category.edit', $category->id) }}" class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('fee.category.delete', $category->id) }}" class="btn btn-danger" id="delete">Delete</a>
+                                                        <a href="{{ route('fee.category.edit', $amount->id) }}" class="btn btn-info">Edit</a>
+                                                        <a href="{{ route('fee.category.delete', $amount->id) }}" class="btn btn-danger" id="delete">Delete</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

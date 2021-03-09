@@ -1,0 +1,113 @@
+@extends('admin.admin_master')
+@section('admin-content')
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="container-full">
+
+            <div class="content-header">
+                <div class="d-flex align-items-center">
+
+                    <div class="mr-auto">
+                        <h3 class="page-title">Add Fee Amount</h3>
+                        <div class="d-inline-block align-items-center">
+                            <nav>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="mdi mdi-home-outline"></i></a></li>
+                                    <li class="breadcrumb-item" aria-current="page">Manage Student</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Student Fee Amount</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <!-- Basic Forms -->
+                <div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Add Student Fee Amount</h4>
+                    <h6 class="box-subtitle">On how to use form please visit <a class="text-warning" href="http://chream/holy-infant-academy.co.uk">official website </a></h6>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                    <div class="col">
+                        <form method="POST" action=" {{ route('fee.category.store') }} ">
+                            @csrf
+                            <div class="row">
+                            <div class="col-12">
+
+                                <div class="form-group">
+                                    <h5> Fee Category <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="fee_category_id" required class="form-control">
+                                            <option value="" selected disabled>Select Fee Category</option>
+                                            @foreach ($fee_categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <h5> Student Class<span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <select name="class_id[]" required class="form-control">
+                                                    <option value="" selected disabled>Select Fee Category</option>
+                                                    @foreach ($student_classes as $student_class)
+                                                        <option value="{{ $student_class->id }}">{{ $student_class->name }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div><!-- ./form-group -->
+                                        </div><!-- ./col-md-5 -->
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <h5>Amount<span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <input type="text" name="amount[]" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div><!-- ./col-md-5 -->
+
+                                    <div class="col-md-2" style="padding-top: 23px;">
+                                        <span class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i></span>
+                                    </div><!-- ./col-md-5 -->
+
+                                </div><!-- ./row -->
+
+
+
+                            </div>
+                            <div class="text-xs-right">
+                                <input type="submit" class="btn btn-rounded btn-info mb-5" value="Submit">
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+            </section>
+            <!-- /.content -->
+
+        </div>
+    </div>
+<!-- /.content-wrapper -->
+
+@endsection

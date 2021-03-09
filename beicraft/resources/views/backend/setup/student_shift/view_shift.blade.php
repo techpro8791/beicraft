@@ -45,13 +45,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($all_data as $key => $student)
+                                            @foreach ($all_data as $key => $shift)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $student->name }}</td>
+                                                    <td>{{ $shift->name }}</td>
                                                     <td>
-                                                        <a href="{{ route('student.shift.edit', $student->id) }}" class="btn btn-info">Edit</a>
-                                                        <a href="{{ route('student.shift.delete', $student->id) }}" class="btn btn-danger" id="delete">Delete</a>
+                                                        <a href="{{ route('student.shift.edit', $shift->id) }}" class="btn btn-info">Edit</a>
+                                                        <a href="{{ route('student.shift.delete', $shift->id) }}" class="btn btn-danger" id="delete">Delete</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

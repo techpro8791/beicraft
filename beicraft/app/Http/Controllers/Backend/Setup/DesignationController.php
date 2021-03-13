@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers\Backend\Setup;
+
+use App\Http\Controllers\Controller;
+use App\Models\Designation;
+use Illuminate\Http\Request;
+
+class DesignationController extends Controller
+{
+    # Conosector
+    public function __contruct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function ViewDesignation()
+    {
+        $data['all_data'] = Designation::all();
+
+        return view('backend.setup.designation.view_designation', $data);
+    }
+
+    public function DesignationAdd()
+    {
+        return view('backend.setup.designation.add_designation');
+    }
+
+    public function DesignationStore(Request $request)
+    {
+        $validate_data = $request->validate([
+            'name' => 'required|unique:designations,name',
+        ]);
+
+        $data = new Designation();
+        $data->name = $request->name;
+        $data->save();
+
+        $notification = array(
+            'message' => 'Designation Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->route('designation.view')->with($notification);
+    }
+
+    public function DesignationEdit($id)
+    {
+        $edit_data = Designation::find($id);
+
+        return view('backend.setup.designation.edit_designation',compact('edit_data'));
+    }
+
+    public function DesignationUpdate(Request $request, $id)
+    {
+        $data = Designation::find($id);
+
+        $validate_data = $request->validate([
+            'name' => 'required|unique:designations,name, '.$data->id,
+        ]);
+
+        $data->name = $request->name;
+        $data->save();
+
+        $notification = array(
+            'message' => 'Designation Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+        return Redirect()->route('designation.view')->with($notification);
+    }
+
+    public function DesignationDelete($id)
+    {
+        $delete_data = Designation::find($id);
+        $delete_data->delete();
+
+        $notification = array(
+            'message' => 'Designation Deleted Successfully',
+            'alert-type' => 'info'
+        );
+
+        return Redirect()->route('designation.view')->with($notification);
+    }
+}

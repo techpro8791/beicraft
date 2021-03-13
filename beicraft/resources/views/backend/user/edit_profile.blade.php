@@ -103,8 +103,8 @@
                                             <div class="controls">
                                                 <select name="gender" id="gender" required class="form-control">
                                                     <option value="" selected disabled>Select Gender</option>
-                                                    <option value="Admin" {{ ($edit_data->gender == "Male" ? "selected": "") }}>Male</option>
-                                                    <option value="User" {{ ($edit_data->gender == "Female" ? "selected": "") }}>Female</option>
+                                                    <option value="Male" {{ ($edit_data->gender == "Male" ? "selected": "") }}>Male</option>
+                                                    <option value="Female" {{ ($edit_data->gender == "Female" ? "selected": "") }}>Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
 
                                         <div class="form-group">
                                             <div class="controls">
-                                                <img id="show_image" src="{{ (!empty($user->image)) ? url('upload/user_images/'.$user->image) : url('upload/no_image.jpg') }}" style="width: 100px; height: 100px; border: 1px solid #0000;">
+                                                <img id="show_image" src="{{ (!empty($user->image)) ? url('upload/user_images/'.$user->image) : url('upload/no_image.jpg') }}" style="width: 100px; height: 100px; border: 1px solid #000000;">
                                             </div>
                                         </div>
 

@@ -2,12 +2,18 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ProfileController;
+
+use App\Http\Controllers\Backend\Setup\AssignSubjectController;
+use App\Http\Controllers\Backend\Setup\DesignationController;
+use App\Http\Controllers\Backend\Setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\FeeAmountController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
+use App\Http\Controllers\Backend\Setup\SchoolSubjectController;
 use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
+use App\Http\Controllers\Backend\Student\StudentRegController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -148,13 +154,91 @@ Route::prefix('setups')->group(function(){
     Route::get('fee/amount/view', [FeeAmountController::class, 'ViewFeeAmount'])->name('fee.amount.view');
     # add fee amountv
     Route::get('student/amount/add', [FeeAmountController::class, 'FeeAmountAdd'])->name('fee.amount.add');
-    // # store fee amount
-    // Route::post('student/amount/store', [FeeAmountController::class, 'FeeAmountStore'])->name('fee.amount.store');
-    // # edit fee amount
-    // Route::get('student/amount/edit/{id}', [FeeAmountController::class, 'FeeAmountEdit'])->name('fee.amount.edit');
-    // # update fee amount
-    // Route::post('student/amount/update/{id}', [FeeAmountController::class, 'FeeAmountUpdate'])->name('fee.amount.update');
-    // # delete fee amount
-    // Route::get('student/amount/delete/{id}', [FeeAmountController::class, 'FeeAmountDelete'])->name('fee.amount.delete');
+    # store fee amount
+    Route::post('student/amount/store', [FeeAmountController::class, 'FeeAmountStore'])->name('fee.amount.store');
+    # edit fee amount
+    Route::get('student/amount/edit/{fee_category_id}', [FeeAmountController::class, 'FeeAmountEdit'])->name('fee.amount.edit');
+    # update fee amount
+    Route::post('student/amount/update/{fee_category_id}', [FeeAmountController::class, 'FeeAmountUpdate'])->name('fee.amount.update');
+    # details fee amount
+    Route::get('student/amount/details/{fee_category_id}', [FeeAmountController::class, 'FeeAmountDetails'])->name('fee.amount.details');
 
+    /* ----------------------------------------------- Exam Type ---------------------------------------------- */
+    # View exam type
+    Route::get('exam/type/view', [ExamTypeController::class, 'ViewExamType'])->name('exam.type.view');
+    # add exam type
+    Route::get('exam/type/add', [ExamTypeController::class, 'ExamTypeAdd'])->name('exam.type.add');
+    # store exam type
+    Route::post('exam/type/store', [ExamTypeController::class, 'ExamTypeStore'])->name('exam.type.store');
+    # edit exam type
+    Route::get('exam/type/edit/{id}', [ExamTypeController::class, 'ExamTypeEdit'])->name('exam.type.edit');
+    # update exam type
+    Route::post('exam/type/update/{id}', [ExamTypeController::class, 'ExamTypeUpdate'])->name('exam.type.update');
+    # delete exam type
+    Route::get('exam/type/details/{id}', [ExamTypeController::class, 'ExamTypeDelete'])->name('exam.type.delete');
+
+    /* ----------------------------------------------- School Subject ---------------------------------------------- */
+    # View school subject
+    Route::get('school/subject/view', [SchoolSubjectController::class, 'ViewSchoolSubject'])->name('school.subject.view');
+    # add school subject
+    Route::get('school/subject/add', [SchoolSubjectController::class, 'SchoolSubjectAdd'])->name('school.subject.add');
+    # store school subject
+    Route::post('school/subject/store', [SchoolSubjectController::class, 'SchoolSubjectStore'])->name('school.subject.store');
+    # edit school subject
+    Route::get('school/subject/edit/{id}', [SchoolSubjectController::class, 'SchoolSubjectEdit'])->name('school.subject.edit');
+    # update school subject
+    Route::post('school/subject/update/{id}', [SchoolSubjectController::class, 'SchoolSubjectUpdate'])->name('school.subject.update');
+    # delete school subject
+    Route::get('school/subject/details/{id}', [SchoolSubjectController::class, 'SchoolSubjectDelete'])->name('school.subject.delete');
+
+    /* ----------------------------------------------- Assign Subject ---------------------------------------------- */
+    # View assign subject
+    Route::get('assign/subject/view', [AssignSubjectController::class, 'ViewAssignSubject'])->name('assign.subject.view');
+    # add assign subject
+    Route::get('assign/subject/add', [AssignSubjectController::class, 'AssignSubjectAdd'])->name('assign.subject.add');
+    # store assign subject
+    Route::post('assign/subject/store', [AssignSubjectController::class, 'AssignSubjectStore'])->name('assign.subject.store');
+    # edit assign subject
+    Route::get('assign/subject/edit/{class_id}', [AssignSubjectController::class, 'AssignSubjectEdit'])->name('assign.subject.edit');
+    # update assign subject
+    Route::post('assign/subject/update/{class_id}', [AssignSubjectController::class, 'AssignSubjectUpdate'])->name('assign.subject.update');
+    # delete assign subject
+    Route::get('assign/subject/details/{class_id}', [AssignSubjectController::class, 'AssignSubjectDetails'])->name('assign.subject.details');
+
+     /* ----------------------------------------------- Designation -------------------------------------------- */
+    # designation View
+    Route::get('designation/view', [DesignationController::class, 'ViewDesignation'])->name('designation.view');
+    # add designation
+    Route::get('designation/add', [DesignationController::class, 'DesignationAdd'])->name('designation.add');
+    # store designation
+    Route::post('designation/store', [DesignationController::class, 'DesignationStore'])->name('designation.store');
+    # edit designation
+    Route::get('designations/edit/{id}', [DesignationController::class, 'DesignationEdit'])->name('designation.edit');
+    # update designation
+    Route::post('designation/update/{id}', [DesignationController::class, 'DesignationUpdate'])->name('designation.update');
+    # delete designation
+    Route::get('designation/delete/{id}', [DesignationController::class, 'DesignationDelete'])->name('designation.delete');
+});
+
+# Student Group
+Route::prefix('students')->group(function(){
+    /* ----------------------------------------------- Registration -------------------------------------------- */
+    # student registration View
+    Route::get('registration/view', [StudentRegController::class, 'StudentRegView'])->name('student.registration.view');
+    # student registration add
+    Route::get('registration/add', [StudentRegController::class, 'StudentRegAdd'])->name('student.registration.add');
+    # student registration store
+    Route::post('registration/store', [StudentRegController::class, 'StudentRegStore'])->name('student.registration.store');
+    # student registration search
+    Route::get('year/class/search', [StudentRegController::class, 'StudentSearch'])->name('student.year.class.search');
+    # registration student edit
+    Route::get('registration/edit/{student_id}', [StudentRegController::class, 'StudentRegEdit'])->name('student.registration.edit');
+    # registration student promotion
+    Route::get('registration/promotion/{student_id}', [StudentRegController::class, 'StudentRegPromotion'])->name('student.registration.promotion');
+    # student registration update
+    Route::post('registration/update/{student_id}', [StudentRegController::class, 'StudentRegUpdate'])->name('student.registration.update');
+    # student promotion update
+    Route::post('registration/promotion/update/{student_id}', [StudentRegController::class, 'StudentPromotionUpdate'])->name('student.registration.promotion.update');
+    # student Registration Details
+    Route::get('/registration/details/{student_id}', [StudentRegController::class, 'StudentRegDetails'])->name('student.registration.details');
 });

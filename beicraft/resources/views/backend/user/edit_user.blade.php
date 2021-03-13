@@ -14,7 +14,7 @@
                             <nav>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="mdi mdi-home-outline"></i></a></li>
-                                    <li class="breadcrumb-item" aria-current="page">View Users</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('user.view') }}">View Users</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Edit User</li>
                                 </ol>
                             </nav>
@@ -47,10 +47,10 @@
                                         <div class="form-group">
                                             <h5> User Role <span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <select name="usertype" id="usertype" required class="form-control">
+                                                <select name="role" required class="form-control">
                                                     <option value="" selected disabled>Select Role</option>
-                                                    <option value="Admin" {{ ($edit_data->usertype == "Admin" ? "selected": "") }}>Admin</option>
-                                                    <option value="User" {{ ($edit_data->usertype == "User" ? "selected": "") }}>User</option>
+                                                    <option value="Admin" {{ ($edit_data->role == "Admin" ? "selected": "") }}>Admin</option>
+                                                    <option value="Operator" {{ ($edit_data->role == "Operator" ? "selected": "") }}>Operator</option>
                                                 </select>
                                             </div>
                                         </div>

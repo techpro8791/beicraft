@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class FeeAmount extends Model
 {
-    use HasFactory;
+    public function fee_category()
+    {
+        # creates a relation between FeeAmount and FeeCategory tables
+        return $this->belongsTo(FeeCategory::class, 'fee_category_id', 'id');
+    }
+
+    public function student_class()
+    {
+        # creates a relation between FeeAmount and StudentClass tables
+        return $this->belongsTo(StudentClass::class, 'class_id', 'id');
+    }
 }

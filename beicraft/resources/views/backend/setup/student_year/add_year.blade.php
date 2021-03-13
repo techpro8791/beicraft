@@ -14,7 +14,7 @@
                             <nav>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="mdi mdi-home-outline"></i></a></li>
-                                    <li class="breadcrumb-item" aria-current="page">Manage Student</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('student.year.view') }}">Student Year</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Add Student Year</li>
                                 </ol>
                             </nav>

@@ -13,7 +13,11 @@ use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
+use App\Http\Controllers\Backend\Student\ExamFeeController;
+use App\Http\Controllers\Backend\Student\MonthlyFeeController;
+use App\Http\Controllers\Backend\Student\RegistrationFeeController;
 use App\Http\Controllers\Backend\Student\StudentRegController;
+use App\Http\Controllers\Backend\Student\StudentRollController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -240,5 +244,29 @@ Route::prefix('students')->group(function(){
     # student promotion update
     Route::post('registration/promotion/update/{student_id}', [StudentRegController::class, 'StudentPromotionUpdate'])->name('student.registration.promotion.update');
     # student Registration Details
-    Route::get('/registration/details/{student_id}', [StudentRegController::class, 'StudentRegDetails'])->name('student.registration.details');
+    Route::get('registration/details/{student_id}', [StudentRegController::class, 'StudentRegDetails'])->name('student.registration.details');
+    # student roll generation
+    Route::get('roll/generate/view', [StudentRollController::class, 'StudentRollView'])->name('roll.generate.view');
+    # get student registration
+    Route::get('registration/get/student', [StudentRollController::class, 'GetStudents'])->name('student.registration.getstudents');
+    # get student registration
+    Route::post('roll/generate/store', [StudentRollController::class, 'StudentRollStore'])->name('roll.generate.store');
+    # registration fee view
+    Route::get('registration/fee/view', [RegistrationFeeController::class, 'RegFeeView'])->name('registration.fee.view');
+    # get student registration fee
+    Route::get('student/registration/fee/get', [RegistrationFeeController::class, 'GetStudentsFee'])->name('student.registration.fee.get');
+    # get student registration fee payslip
+    Route::get('student/registration/fee/payslip', [RegistrationFeeController::class, 'GetStudentsFeePayslip'])->name('student.registration.fee.payslip');
+    # get student exam fee
+    Route::get('student/exam/fee/get', [ExamFeeController::class, 'ExamFeeView'])->name('exam.fee.view');
+    # get student exam fee class data
+    Route::get('student/exam/fee/classdata', [ExamFeeController::class, 'ExamFeeClassData'])->name('exam.fee.classdata');
+    # get student exam fee payslip
+    Route::get('student/exam/fee/payslip', [ExamFeeController::class, 'ExamFeePayslip'])->name('student.exam.fee.payslip');
+    # get student exam fee
+    Route::get('student/monthly/fee/get', [MonthlyFeeController::class, 'MonthlyFeeView'])->name('monthly.fee.view');
+    # get student exam fee class data
+    Route::get('student/monthly/fee/classdata', [MonthlyFeeController::class, 'MonthlyFeeClassData'])->name('monthly.fee.classdata');
+    # get student exam fee payslip
+    Route::get('student/monthly/fee/payslip', [MonthlyFeeController::class, 'MonthlyFeePayslip'])->name('student.monthly.fee.payslip');
 });

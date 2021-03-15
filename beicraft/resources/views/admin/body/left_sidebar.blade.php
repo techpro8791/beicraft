@@ -88,6 +88,10 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{ route('student.registration.view') }}"><i class="ti-more"></i>Student Registration</a></li>
+              <li><a href="{{ route('roll.generate.view') }}"><i class="ti-more"></i>Generate Roll</a></li>
+              <li><a href="{{ route('registration.fee.view') }}"><i class="ti-more"></i>Registration Fee</a></li>
+              <li><a href="{{ route('exam.fee.view') }}"><i class="ti-more"></i>Exam Fee</a></li>
+              <li><a href="{{ route('monthly.fee.view') }}"><i class="ti-more"></i>Monthly Fee</a></li>
             </ul>
         </li>
 

@@ -79,7 +79,7 @@
 
                         <div class="box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Add Student</h3>
+                                <h3 class="box-title">Students</h3>
                                 <a href="{{ route('student.registration.add') }}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add Student</a>
                             </div>
                             <!-- /.box-header -->
@@ -93,7 +93,7 @@
                                                     <th width="5%">SN</th>
                                                     <th>Name</th>
                                                     <th>ID Number</th>
-                                                    <th>Role</th>
+                                                    <th>Roll</th>
                                                     <th>Year</th>
                                                     <th>Class</th>
                                                     <th>Image</th>
@@ -111,7 +111,7 @@
                                                         <td>{{ $key + 1 }}</td>
                                                         <td>{{ $value['student']['name'] }}</td>
                                                         <td>{{ $value['student']['id_number'] }}</td>
-                                                        <td>{{ $value->role }}</td>
+                                                        <td>{{ $value->roll }}</td>
                                                         <td>{{ $value['student_year']['name'] }}</td>
                                                         <td>{{ $value['student_class']['name'] }}</td>
 
@@ -121,9 +121,9 @@
                                                         </td>
                                                         <td>{{ $value->year_id }}</td>
                                                         <td>
-                                                            <a href=" {{ route('student.registration.edit', $value->student_id) }} " class="btn btn-info">Edit</a>
-                                                            <a href=" {{ route('student.registration.promotion', $value->student_id) }} " class="btn btn-success">Promote</a>
-                                                            <a href=" {{ route('student.registration.promotion', $value->student_id) }} " class="btn btn-info">Details</a>
+                                                            <a title="Edit" href="{{ route('student.registration.edit',$value->student_id) }}" class="btn btn-info"> <i class="fa fa-edit"></i> </a>
+                                                            <a title="Promotion" href="{{ route('student.registration.promotion',$value->student_id) }}" class="btn btn-primary" ><i class="fa fa-check"></i></a>
+                                                            <a target="_blank" title="Details" href="{{ route('student.registration.details',$value->student_id) }}" class="btn btn-danger"  ><i class="fa fa-eye"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 class AdminController extends Controller
 {
 
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
-
     public function Logout()
     {
         Auth::logout();

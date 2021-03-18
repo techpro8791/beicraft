@@ -5,22 +5,6 @@
     <div class="content-wrapper">
         <div class="container-full">
             <!-- Content Header (Page header) -->
-            {{-- <div class="content-header">
-                <div class="d-flex align-items-center">
-                    <div class="mr-auto">
-                        <h3 class="page-title">Add Student</h3>
-                        <div class="d-inline-block align-items-center">
-                            <nav>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="mdi mdi-home-outline"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('student.registration.view') }}">View Students</li>
-                                    <li class="breadcrumb-item active" aria-current="page">Add Student</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
 
             <!-- Main content -->
             <section class="content">
@@ -129,49 +113,6 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                    {{-- @else
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th width="5%">SN</th>
-                                                    <th>Name</th>
-                                                    <th>ID Number</th>
-                                                    <th>Role</th>
-                                                    <th>Year</th>
-                                                    <th>Class</th>
-                                                    <th>Image</th>
-                                                    @if (Auth::user()->role == "Admin")
-                                                        <th>Code</th>
-                                                    @endif
-
-
-                                                    <th width="20%">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($all_data as $key => $value)
-                                                    <tr>
-                                                        <td>{{ $key + 1 }}</td>
-                                                        <td>{{ $value['student']['name'] }}</td>
-                                                        <td>{{ $value['student']['id_number'] }}</td>
-                                                        <td>{{ $value->role }}</td>
-                                                        <td>{{ $value['student_year']['name'] }}</td>
-                                                        <td>{{ $value['student_class']['name'] }}</td>
-
-                                                        <td>
-                                                            <img id="show_image" src="{{ (!empty($value['student']['image'])) ? url('upload/student_images/'.$value['student']['image']) : url('upload/no_image.jpg') }}" style="width: 50px; height: 50px; ">
-
-                                                        </td>
-                                                        <td>{{ $value->year_id }}</td>
-                                                        <td>
-                                                            <a href="  " class="btn btn-info">Edit</a>
-                                                            <a href="  " class="btn btn-danger" id="delete">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    @endif --}}
 
                                 </div>
                             </div>

@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class FeeCategoryController extends Controller
 {
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
 
     public function ViewFeeCategory()
     {

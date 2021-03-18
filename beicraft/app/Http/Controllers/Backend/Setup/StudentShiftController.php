@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class StudentShiftController extends Controller
 {
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
 
     public function ViewShift()
     {

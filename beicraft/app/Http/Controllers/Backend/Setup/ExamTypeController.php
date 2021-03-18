@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class ExamTypeController extends Controller
 {
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
-
     public function ViewExamType()
     {
         $data['all_data'] = ExamType::all();

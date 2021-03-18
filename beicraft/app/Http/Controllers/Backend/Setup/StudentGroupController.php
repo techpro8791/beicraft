@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class StudentGroupController extends Controller
 {
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
-
     public function ViewGroup()
     {
         $data['all_data'] = StudentGroup::all();

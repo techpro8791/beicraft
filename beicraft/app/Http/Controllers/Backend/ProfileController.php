@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProfileController extends Controller
 {
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
 
     public function ProfileView()
     {

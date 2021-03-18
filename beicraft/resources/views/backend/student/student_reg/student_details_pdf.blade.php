@@ -42,7 +42,7 @@
 
     <table id="customers">
     <tr>
-        <th width="10%">SL</th>
+        <th width="10%">SN</th>
         <th width="45%">Student Details</th>
         <th width="45%">Student Data</th>
     </tr>

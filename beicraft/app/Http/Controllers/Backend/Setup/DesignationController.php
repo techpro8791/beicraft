@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class DesignationController extends Controller
 {
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
-
     public function ViewDesignation()
     {
         $data['all_data'] = Designation::all();

@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class AssignSubjectController extends Controller
 {
-    # Conosector
-    public function __contruct()
-    {
-        $this->middleware('auth');
-    }
 
     public function ViewAssignSubject()
     {

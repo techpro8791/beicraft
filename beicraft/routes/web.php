@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AjaxController;
+use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
+use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
+use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
+use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\ProfileController;
 
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
@@ -314,6 +319,61 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('salary/store/{id}', [EmployeeSalaryController::class, 'EmployeeSalaryStore'])->name('employee.salary.store');
         # employee salary details
         Route::get('salary/details/{id}', [EmployeeSalaryController::class, 'EmployeeSalaryDetails'])->name('employee.salary.details');
+
+        /* ----------------------------------------------- Leave -------------------------------------------- */
+        # employee leave View
+        Route::get('leave/view', [EmployeeLeaveController::class, 'EmployeeLeaveView'])->name('employee.leave.view');
+        # employee leave add
+        Route::get('leave/add', [EmployeeLeaveController::class, 'EmployeeLeaveAdd'])->name('employee.leave.add');
+        # employee leave store
+        Route::post('leave/store', [EmployeeLeaveController::class, 'EmployeeLeaveStore'])->name('employee.leave.store');
+        # employee leave edit
+        Route::get('leave/edit/{id}', [EmployeeLeaveController::class, 'EmployeeLeaveEdit'])->name('employee.leave.edit');
+        # employee leave update
+        Route::post('leave/update/{id}', [EmployeeLeaveController::class, 'EmployeeLeaveUpdate'])->name('employee.leave.update');
+        # employee leave delete
+        Route::get('leave/delete/{id}', [EmployeeLeaveController::class, 'EmployeeLeaveDelete'])->name('employee.leave.delete');
+
+        /* ----------------------------------------------- Attendance -------------------------------------------- */
+        # employee attendance View
+        Route::get('attendance/view', [EmployeeAttendanceController::class, 'EmployeeAttendanceView'])->name('employee.attendance.view');
+        # employee attendance add
+        Route::get('attendance/add', [EmployeeAttendanceController::class, 'EmployeeAttendanceAdd'])->name('employee.attendance.add');
+        # employee attendance store
+        Route::post('attendance/store', [EmployeeAttendanceController::class, 'EmployeeAttendanceStore'])->name('employee.attendance.store');
+        # employee attendance edit
+        Route::get('attendance/edit/{date}', [EmployeeAttendanceController::class, 'EmployeeAttendanceEdit'])->name('employee.attendance.edit');
+        # employee attendance details
+        Route::get('attendance/details/{date}', [EmployeeAttendanceController::class, 'EmployeeAttendanceDetails'])->name('employee.attendance.details');
+
+        /* ----------------------------------------------- Monthly Salary -------------------------------------------- */
+        # employee monthly salary View
+        Route::get('monthly/salary/view', [MonthlySalaryController::class, 'MonthlySalaryView'])->name('employee.monthly.salary.view');
+        # employee monthly salary get
+        Route::get('monthly/salary/get', [MonthlySalaryController::class, 'MonthlySalaryGet'])->name('employee.monthly.salary.get');
+        # employee monthly salary get
+        Route::get('monthly/salary/payslip/{employee_id}', [MonthlySalaryController::class, 'MonthlySalaryPayslip'])->name('employee.monthly.salary.payslip');
     });
+
+    # Mark Group
+    Route::prefix('marks')->group(function(){
+        /* ----------------------------------------------- Mark Entry -------------------------------------------- */
+        # mark entry add
+        Route::get('entry/add', [MarksController::class, 'MarksAdd'])->name('marks.entry.add');
+        # mark entry store
+        Route::post('entry/store', [MarksController::class, 'MarksStore'])->name('marks.entry.store');
+        # mark entry edit
+        Route::get('entry/edit', [MarksController::class, 'MarksEdit'])->name('marks.entry.edit');
+        # show student mark entry for edit
+        Route::get('get/student/edit', [MarksController::class, 'MarksEditGetStudents'])->name('student.edit.getstudents');
+        # mark entry update
+        Route::post('entry/update', [MarksController::class, 'MarksUpdate'])->name('marks.entry.update');
+    });
+
+    /* ********************** Ajax Route (Assign Subject Based on Class Selection) ********************************** */
+    # employee mark get subject
+    Route::get('marks/get/subject', [AjaxController::class, 'GetSubject'])->name('marks.get.subject');
+    # employee mark get student
+    Route::get('marks/get/student', [AjaxController::class, 'GetStudents'])->name('student.marks.get.students');
 
 }); # end middleware auth route

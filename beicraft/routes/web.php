@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\AjaxController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
@@ -379,9 +380,9 @@ Route::group(['middleware' => 'auth'], function()
         # mark entry grade store
         Route::post('entry/grade/store', [GradeController::class, 'MarksGradeStore'])->name('marks.entry.grade.store');
         # mark entry grade edit
-        // Route::get('entry/grade/edit/{id}', [GradeController::class, 'MarksGradeEdit'])->name('marks.entry.grade.edit');
+        Route::get('entry/grade/edit/{id}', [GradeController::class, 'MarksGradeEdit'])->name('marks.entry.grade.edit');
         # mark entry grade update
-        // Route::post('entry/grade/update/{id}', [GradeController::class, 'MarksGradeUpdate'])->name('marks.entry.grade.update');
+        Route::post('entry/grade/update/{id}', [GradeController::class, 'MarksGradeUpdate'])->name('marks.entry.grade.update');
     });
 
     /* ********************** Ajax Route (Assign Subject Based on Class Selection) ********************************** */
@@ -389,5 +390,26 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('marks/get/subject', [AjaxController::class, 'GetSubject'])->name('marks.get.subject');
     # employee mark get student
     Route::get('marks/get/student', [AjaxController::class, 'GetStudents'])->name('student.marks.get.students');
+
+    # Mark Group
+    Route::prefix('account')->group(function(){
+
+        /* ----------------------------------------------- Student Fee -------------------------------------------- */
+        # account student fee view
+        Route::get('student/fee/view', [StudentFeeController::class, 'StudentFeeView'])->name('student.fee.view');
+        # account student fee add
+        Route::get('student/fee/add', [StudentFeeController::class, 'StudentFeeAdd'])->name('student.fee.add');
+        # account student fee getstudent
+        Route::get('student/fee/getstudent', [StudentFeeController::class, 'StudentFeeGetStudent'])->name('account.fee.getstudent');
+        # account student fee store
+        Route::post('student/fee/store', [StudentFeeController::class, 'StudentFeeStore'])->name('account.fee.store');
+
+
+        /* ----------------------------------------------- Employee Salary -------------------------------------------- */
+
+
+        /* ----------------------------------------------- Other Cost -------------------------------------------- */
+
+    });
 
 }); # end middleware auth route

@@ -14,8 +14,8 @@
 
                         <div class="box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Grade Mark List</h3>
-                                <a href="{{ route('marks.entry.grade.add') }}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add Grade Mark</a>
+                                <h3 class="box-title">Student Fee List</h3>
+                                <a href="{{ route('student.fee.add') }}" style="float: right;" class="btn btn-rounded btn-success mb-5"> Add / Edit Fee</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -24,30 +24,26 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">SN</th>
-                                                <th>Grade</th>
-                                                <th>Point</th>
-                                                <th>Mark Range</th>
-                                                <th>Point Range</th>
-                                                <th>Remarks</th>
-
-                                                <th width="10%">Action</th>
+                                                <th>ID No</th>
+                                                <th>Name</th>
+                                                <th>Year</th>
+                                                <th>Class</th>
+                                                <th>Fee Type</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($all_data as $key => $value)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $value->grade_name }}</td>
-                                                    <td>{{ $value->grade_point }}</td>
-                                                    <td>{{ $value->start_marks }} - {{ $value->end_marks }}</td>
-                                                    <td>{{ $value->start_point }} - {{ $value->end_point }}</td>
-                                                    <td>{{ $value->remarks }}</td>
-
-                                                    <td>
-                                                        <center>
-                                                            <a title="Edit" href="{{ route('marks.entry.grade.edit',$value->id) }}" class="btn btn-info"> <i class="fa fa-edit"></i> </a>
-                                                        </center>
-                                                    </td>
+                                                    <td>{{ $value['student']['id_number'] }}</td>
+                                                    <td>{{ $value['student']['name']  }}</td>
+                                                    <td>{{ $value['student_year']['name']  }}</td>
+                                                    <td>{{ $value['student_class']['name']  }}</td>
+                                                    <td>{{ $value['fee_category']['name']  }}</td>
+                                                    <td>{{ '₦ '.number_format($value->amount)  }}</td>
+                                                    <td>{{ date('M Y', strtotime($value->date))  }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

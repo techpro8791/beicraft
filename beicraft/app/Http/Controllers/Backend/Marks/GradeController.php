@@ -8,20 +8,23 @@ use Illuminate\Http\Request;
 
 class GradeController extends Controller
 {
-    public function MarksGradeView(){
-    	$data['allData'] = MarksGrade::all();
+    public function MarksGradeView()
+    {
+    	$data['all_data'] = MarksGrade::all();
     	return view('backend.student_marks.grade.grade_marks_view', $data);
 
     }
 
 
-    public function MarksGradeAdd(){
+    public function MarksGradeAdd()
+    {
     	return view('backend.student_marks.grade.grade_marks_add');
     }
 
 
 
-    public function MarksGradeStore(Request $request){
+    public function MarksGradeStore(Request $request)
+    {
 
     	$data = new MarksGrade();
     	$data->grade_name = $request->grade_name;
@@ -38,20 +41,21 @@ class GradeController extends Controller
     		'alert-type' => 'success'
     	);
 
-    	return redirect()->route('marks.entry.grade')->with($notification);
-
+    	return redirect()->route('marks.entry.grade.view')->with($notification);
 
     } // end Method
 
 
-    public function MarksGradeEdit($id){
+    public function MarksGradeEdit($id)
+    {
     	$data['editData'] = MarksGrade::find($id);
     	return view('backend.student_marks.grade.grade_marks_edit', $data);
 
     }
 
 
-    public function MarksGradeUpdate(Request $request, $id){
+    public function MarksGradeUpdate(Request $request, $id)
+    {
 
     	$data = MarksGrade::find($id);
     	$data->grade_name = $request->grade_name;
@@ -68,7 +72,7 @@ class GradeController extends Controller
     		'alert-type' => 'success'
     	);
 
-    	return redirect()->route('marks.entry.grade')->with($notification);
+    	return redirect()->route('marks.entry.grade.view')->with($notification);
 
     }
 }

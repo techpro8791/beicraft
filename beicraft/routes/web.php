@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
+use App\Http\Controllers\Backend\Marks\GradeController;
 use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\ProfileController;
 
@@ -357,7 +358,8 @@ Route::group(['middleware' => 'auth'], function()
 
     # Mark Group
     Route::prefix('marks')->group(function(){
-        /* ----------------------------------------------- Mark Entry -------------------------------------------- */
+
+        /* ----------------------------------------------- Marks -------------------------------------------- */
         # mark entry add
         Route::get('entry/add', [MarksController::class, 'MarksAdd'])->name('marks.entry.add');
         # mark entry store
@@ -368,6 +370,18 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('get/student/edit', [MarksController::class, 'MarksEditGetStudents'])->name('student.edit.getstudents');
         # mark entry update
         Route::post('entry/update', [MarksController::class, 'MarksUpdate'])->name('marks.entry.update');
+
+        /* ----------------------------------------------- Grade -------------------------------------------- */
+        # mark entry grade view
+        Route::get('entry/grade/view', [GradeController::class, 'MarksGradeView'])->name('marks.entry.grade.view');
+        # mark entry grade add
+        Route::get('entry/grade/add', [GradeController::class, 'MarksGradeAdd'])->name('marks.entry.grade.add');
+        # mark entry grade store
+        Route::post('entry/grade/store', [GradeController::class, 'MarksGradeStore'])->name('marks.entry.grade.store');
+        # mark entry grade edit
+        // Route::get('entry/grade/edit/{id}', [GradeController::class, 'MarksGradeEdit'])->name('marks.entry.grade.edit');
+        # mark entry grade update
+        // Route::post('entry/grade/update/{id}', [GradeController::class, 'MarksGradeUpdate'])->name('marks.entry.grade.update');
     });
 
     /* ********************** Ajax Route (Assign Subject Based on Class Selection) ********************************** */

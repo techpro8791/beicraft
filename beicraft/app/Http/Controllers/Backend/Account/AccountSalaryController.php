@@ -12,7 +12,7 @@ class AccountSalaryController extends Controller
     public function AccountSalaryView(){
 
     	$data['all_data'] = AccountEmployeeSalary::all();
-    	return view('backend.account.employee_salary.employee_salary_view',$data);
+    	return view('backend.account.employee_salary.employee_salary_view', $data);
 
     }
 
@@ -36,7 +36,7 @@ class AccountSalaryController extends Controller
         $html['thsource'] .= '<th>ID NO</th>';
         $html['thsource'] .= '<th>Employee Name</th>';
         $html['thsource'] .= '<th>Basic Salary</th>';
-        $html['thsource'] .= '<th>Salary This Month</th>';
+        $html['thsource'] .= '<th>Actual Salary</th>';
         $html['thsource'] .= '<th>Select</th>';
 
 
@@ -57,17 +57,17 @@ class AccountSalaryController extends Controller
             $absent_count = count($total_attend->where('attend_status','Absent'));
 
             $html[$key]['tdsource']  = '<td>'.($key+1).'</td>';
-            $html[$key]['tdsource'] .= '<td>'.$attend['user']['id_no'].'<input type="hidden" name="date" value="'.$date.'" >'.'</td>';
+            $html[$key]['tdsource'] .= '<td>'.$attend['user']['id_number'].'<input type="hidden" name="date" value="'.$date.'" >'.'</td>';
 
             $html[$key]['tdsource'] .= '<td>'.$attend['user']['name'].'</td>';
-            $html[$key]['tdsource'] .= '<td>'.$attend['user']['salary'].'</td>';
+            $html[$key]['tdsource'] .= '<td>'.'₦ '.number_format($attend['user']['salary'], 2).'</td>';
 
             $salary = (float)$attend['user']['salary'];
             $salary_per_day = (float)$salary/30;
             $amount_deducted = (float)$absent_count * (float)$salary_per_day;
-            $total_salary = (float)$salary-(float)$amount_deducted;
+            $total_salary = (float)$salary - (float)$amount_deducted;
 
-            $html[$key]['tdsource'] .='<td>'.$total_salary.'<input type="hidden" name="amount[]" value="'.$total_salary.'" >'.'</td>';
+            $html[$key]['tdsource'] .='<td>'.'₦ '.number_format($total_salary, 2).'<input type="hidden" name="amount[]" value="'.$total_salary.'" >'.'</td>';
 
 
             $html[$key]['tdsource'] .='<td>'.'<input type="hidden" name="employee_id[]" value="'.$attend->employee_id.'">'.'<input type="checkbox" name="checkmanage[]" id="'.$key.'" value="'.$key.'" '.$checked.' style="transform: scale(1.5);margin-left: 10px;"> <label for="'.$key.'"> </label> '.'</td>';
@@ -88,11 +88,11 @@ class AccountSalaryController extends Controller
     	$check_data = $request->checkmanage;
 
     	if ($check_data !=null) {
-    		for ($i=0; $i <count($check_data) ; $i++) {
+    		for ($i=0; $i < count($check_data) ; $i++) {
     			$data = new AccountEmployeeSalary();
     			$data->date = $date;
     			$data->employee_id = $request->employee_id[$check_data[$i]];
-    			$data->amount = $request->amount[$check_data[$i]];
+    			$data->amount = filter_var(number_format($request->amount[$check_data[$i]],0),FILTER_SANITIZE_NUMBER_INT);
     			$data->save();
     		}
     	} // end if

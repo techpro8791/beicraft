@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class OtherCostController extends Controller
 {
     public function OtherCostView(){
-    	$data['allData'] = AccountOtherCost::orderBy('id','desc')->get();
+    	$data['all_data'] = AccountOtherCost::orderBy('id','desc')->get();
     	return view('backend.account.other_cost.other_cost_view', $data);
     }
 
@@ -23,7 +23,7 @@ class OtherCostController extends Controller
 
     	$cost = new AccountOtherCost();
     	$cost->date = date('Y-m-d', strtotime($request->date));
-    	$cost->amount = $request->amount;
+    	$cost->amount = filter_var(number_format((float)$request->amount,0), FILTER_SANITIZE_NUMBER_INT);
 
     	if ($request->file('image')) {
     		$file = $request->file('image');
@@ -45,17 +45,15 @@ class OtherCostController extends Controller
 
 
     public function OtherCostEdit($id){
-        $data['editData'] = AccountOtherCost::find($id);
+        $data['edit_data'] = AccountOtherCost::find($id);
     	return view('backend.account.other_cost.other_cost_edit', $data);
     }
-
-
 
     public function OtherCostUpdate(Request $request, $id){
 
     	$cost = AccountOtherCost::find($id);
     	$cost->date = date('Y-m-d', strtotime($request->date));
-    	$cost->amount = $request->amount;
+    	$cost->amount = filter_var(number_format((float)$request->amount,0), FILTER_SANITIZE_NUMBER_INT);
 
     	if ($request->file('image')) {
     		$file = $request->file('image');

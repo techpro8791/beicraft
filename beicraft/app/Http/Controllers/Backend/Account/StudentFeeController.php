@@ -100,7 +100,7 @@ class StudentFeeController extends Controller
                 $data->date = $date;
                 $data->fee_category_id = $request->fee_category_id;
                 $data->student_id = $request->student_id[$check_data[$i]];
-                $data->amount = filter_var($request->amount[$check_data[$i]], FILTER_SANITIZE_NUMBER_INT);
+                $data->amount = filter_var(number_format($request->amount[$check_data[$i]],0), FILTER_SANITIZE_NUMBER_INT);
                 $data->save();
             } // end for loop
         } // end if

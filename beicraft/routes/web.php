@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\Account\AccountSalaryController;
+use App\Http\Controllers\Backend\Account\OtherCostController;
 use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\AjaxController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
@@ -11,7 +13,8 @@ use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 use App\Http\Controllers\Backend\Marks\GradeController;
 use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\ProfileController;
-
+use App\Http\Controllers\Backend\Report\MarkSheetController;
+use App\Http\Controllers\Backend\Report\ProfitController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
@@ -404,11 +407,50 @@ Route::group(['middleware' => 'auth'], function()
         # account student fee store
         Route::post('student/fee/store', [StudentFeeController::class, 'StudentFeeStore'])->name('account.fee.store');
 
-
         /* ----------------------------------------------- Employee Salary -------------------------------------------- */
 
+        # account salary view
+        Route::get('salary/view', [AccountSalaryController::class, 'AccountSalaryView'])->name('account.salary.view');
+        # account salary add
+        Route::get('salary/add', [AccountSalaryController::class, 'AccountSalaryAdd'])->name('account.salary.add');
+        # account salary getstudent
+        Route::get('salary/getstudent', [AccountSalaryController::class, 'AccountSalaryGetEmployee'])->name('account.fee.getemployee');
+        # account salary store
+        Route::post('salary/store', [AccountSalaryController::class, 'AccountSalaryStore'])->name('account.salary.store');
 
         /* ----------------------------------------------- Other Cost -------------------------------------------- */
+         # other cost view
+         Route::get('other/cost/view', [OtherCostController::class, 'OtherCostView'])->name('other.cost.view');
+         # other cost add
+         Route::get('other/cost/add', [OtherCostController::class, 'OtherCostAdd'])->name('other.cost.add');
+         # other cost store
+         Route::post('other/cost/store', [OtherCostController::class, 'OtherCostStore'])->name('other.cost.store');
+         # other cost edit
+         Route::get('other/cost/edit/{id}', [OtherCostController::class, 'OtherCostEdit'])->name('other.cost.edit');
+         # other cost update
+         Route::post('other/cost/update/{id}', [OtherCostController::class, 'OtherCostUpdate'])->name('other.cost.update');
+
+    });
+
+    # Profit Group
+    Route::prefix('reports')->group(function(){
+
+        /* ----------------------------------------------- Profit -------------------------------------------- */
+        # monthly annual profit view
+        Route::get('monthly/annual/profit/view', [ProfitController::class, 'MonthlyAnnualProfitView'])->name('monthly.annual.profit.view');
+        # monthly annual profit get
+        Route::get('monthly/annual/profit/get', [ProfitController::class,'MonthlyAnnualProfitGet'])->name('report.profit.get');
+        # report profit pdf
+        Route::get('report/profit/pdf', [ProfitController::class,'MonthlyAnnualProfitPdf'])->name('report.profit.pdf');
+
+        /* ----------------------------------------------- Marksheet -------------------------------------------- */
+        # marksheet generate view
+        Route::get('marksheet/generate/view', [MarkSheetController::class, 'MarkSheetView'])->name('marksheet.generate.view');
+        # marksheet report get
+        Route::get('report/marksheet/get', [MarkSheetController::class, 'MarkSheetGet'])->name('report.marksheet.get');
+
+        /* ----------------------------------------------- ID-Card -------------------------------------------- */
+
 
     });
 

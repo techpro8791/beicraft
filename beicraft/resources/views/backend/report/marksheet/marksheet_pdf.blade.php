@@ -27,11 +27,15 @@
                                     <div class="col-md-2 text-center">
 
                                     </div>
-                                    <div class="col-md-2 text-center" style="float: right;">
+                                    <div class="col-md-4 text-center" style="float: right;">
                                         <h4><strong>Holy Infant Academy</strong></h4>
                                         <h6><strong>Makurdi, Benue State, Nigeria.</strong></h6>
                                         <h5><strong><u><i>Academic Transcript</i></u></strong></h5>
                                         <h6><strong>{{ $all_marks['0']['exam_type']['name'] }}</strong></h6>
+                                    </div>
+
+                                    <div class="col-md-4 text-center" style="float: right;">
+                                        <img src="{{ (!empty($student->image)) ? url('upload/student_images/'.$student->image) : url('upload/no_image.jpg') }}" alt="User Avatar" style="width: 120px; height: 100px;">
                                     </div>
 
                                     <div class="col-md-12">
@@ -41,7 +45,7 @@
 
                                 </div><!-- ./end row 1 -->
 
-                                <div class="row"> <
+                                <div class="row">
 
                                     <div class="col-md-6">
 
@@ -49,6 +53,12 @@
                                             @php
                                                 $assign_student = App\Models\AssignStudent::where('year_id',$all_marks['0']->year_id)->where('class_id',$all_marks['0']->class_id)->first();
                                             @endphp
+
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="2" style="text-align: center;"> Student Details </th>
+                                                    </tr>
+                                                </thead>
 
                                             <tr>
                                                 <td width="50%">Student ID</td>
@@ -75,6 +85,16 @@
                                             <tr>
                                                 <td width="50%">Session</td>
                                                 <td width="50%">{{ $all_marks['0']['year']['name'] }}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td width="50%"> Email </td>
+                                                <td width="50%">{{ $student->email }}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td width="50%"> Phone </td>
+                                                <td width="50%">{{ $student->mobile }}</td>
                                             </tr>
 
                                         </table>
@@ -153,8 +173,8 @@
                                                 @endforeach
 
                                                 <tr>
-                                                <td colspan="3"><strong style="padding-left: 30px;">Total Maks</strong></td>
-                                                <td colspan="3"><strong style="padding-left: 38px;">{{ $total_marks }}</strong></td>
+                                                    <td colspan="3"><strong style="padding-left: 30px;">Total Maks</strong></td>
+                                                    <td colspan="3"><strong style="padding-left: 38px;">{{ $total_marks }}</strong></td>
                                                 </tr>
 
                                             </tbody>
@@ -180,9 +200,9 @@
                                         <td width="50%"><strong>Grade Point Average</strong></td>
                                         <td width="50%">
                                             @if($count_fail > 0)
-                                            0.00
+                                                0.00
                                             @else
-                                            {{number_format((float)$grade_point_avg,2)}}
+                                                {{number_format((float)$grade_point_avg,2)}}
                                             @endif
                                         </td>
                                     </tr>
@@ -191,9 +211,9 @@
                                         <td width="50%"><strong>Letter Grade </strong></td>
                                         <td width="50%">
                                             @if($count_fail > 0)
-                                            F
+                                                F
                                             @else
-                                            {{ $total_grade->grade_name }}
+                                                {{ $total_grade->grade_name }}
                                             @endif
                                         </td>
                                     </tr>

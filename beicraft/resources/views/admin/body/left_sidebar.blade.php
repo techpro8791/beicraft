@@ -139,7 +139,7 @@
             </ul>
         </li>
 
-        <li class="header nav-small-cap">Report Interface</li>
+        {{-- <li class="header nav-small-cap">Report Interface</li> --}}
 
         <li class="treeview {{ ($prefix == '/reports') ? 'active' : '' }} ">
             <a href="#">
@@ -151,6 +151,9 @@
             <ul class="treeview-menu">
               <li class="{{ ($route == 'monthly.annual.profit.view') ? 'active' : '' }}"><a href="{{ route('monthly.annual.profit.view') }}"><i class="ti-more"></i>Monthly-Annual Profit</a></li>
               <li class="{{ ($route == 'marksheet.generate.view') ? 'active' : '' }}"><a href="{{ route('marksheet.generate.view') }}"><i class="ti-more"></i>Generate Marksheet</a></li>
+              <li class="{{ ($route == 'attendance.report.view') ? 'active' : '' }}"><a href="{{ route('attendance.report.view') }}"><i class="ti-more"></i>Attendance Report</a></li>
+              <li class="{{ ($route == 'student.result.view')?'active':'' }}"><a href="{{ route('student.result.view') }}"><i class="ti-more"></i>Student Result </a></li>
+                <li class="{{ ($route == 'student.idcard.view')?'active':'' }}"><a href="{{ route('student.idcard.view') }}"><i class="ti-more"></i>Student ID Card </a></li>
             </ul>
         </li>
 
@@ -203,12 +206,12 @@
       </ul>
     </section>
 
-	<div class="sidebar-footer">
+	{{-- <div class="sidebar-footer">
 		<!-- item-->
 		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>
 		<!-- item-->
 		<a href="mailbox_inbox.html" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="ti-email"></i></a>
 		<!-- item-->
 		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
-	</div>
+	</div> --}}
   </aside>

@@ -8,6 +8,7 @@ use App\Models\MarksGrade;
 use App\Models\StudentClass;
 use App\Models\StudentMarks;
 use App\Models\StudentYear;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MarkSheetController extends Controller
@@ -38,8 +39,9 @@ class MarkSheetController extends Controller
 
             $all_marks = StudentMarks::with(['assign_subject','year'])->where('year_id',$year_id)->where('class_id',$class_id)->where('exam_type_id',$exam_type_id)->where('id_number',$id_number)->get();
                 // dd($all_marks->toArray());
+                $student = User::where('id_number', $id_number)->first();
             $all_grades = MarksGrade::all();
-            return view('backend.report.marksheet.marksheet_pdf',compact('all_marks','all_grades','count_fail'));
+            return view('backend.report.marksheet.marksheet_pdf',compact('all_marks','all_grades','count_fail','student'));
 
         }else{
 

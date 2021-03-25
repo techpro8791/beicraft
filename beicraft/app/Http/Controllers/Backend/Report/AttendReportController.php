@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Report;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmployeeAttendance;
@@ -10,13 +10,13 @@ use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class AttendReportController extends Controller
 {
-    public function AttenReportView()
+    public function AttendReportView()
     {
     	$data['employees'] = User::where('usertype','employee')->get();
     	return view('backend.report.attend_report.attend_report_view',$data);
     }
 
-    public function AttenReportGet(Request $request)
+    public function AttendReportGet(Request $request)
     {
 
     	$employee_id = $request->employee_id;
@@ -32,7 +32,7 @@ class AttendReportController extends Controller
 
         if ($singleAttendance == true)
         {
-            $data['allData'] = EmployeeAttendance::with(['user'])->where($where)->get();
+            $data['all_data'] = EmployeeAttendance::with(['user'])->where($where)->get();
             // dd($data['allData']->toArray());
             $data['absents'] = EmployeeAttendance::with(['user'])->where($where)->where('attend_status','Absent')->get()->count();
             $data['leaves'] = EmployeeAttendance::with(['user'])->where($where)->where('attend_status','Leave')->get()->count();
@@ -45,7 +45,7 @@ class AttendReportController extends Controller
         }else{
 
             $notification = array(
-                'message' => 'Sorry These Criteria Donse not match',
+                'message' => "Sorry These Criteria doesn't not match",
                 'alert-type' => 'error'
             );
 
